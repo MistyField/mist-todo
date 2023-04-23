@@ -51,5 +51,6 @@ span{
   font-family: Quicksand;
   font-size: 0.8rem;
   color: #163268;
+  user-select: none;
 }
 </style>

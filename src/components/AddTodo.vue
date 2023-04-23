@@ -31,6 +31,9 @@ export default {
   color: #163268;
   background: rgb(245, 246, 252);
 }
+.input-add-todo input:hover{
+  box-shadow: 0px 6px 2px -4px rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.14), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
+}
 .input-add-todo button {
   width: 46px;
   height: 46px;
