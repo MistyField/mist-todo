@@ -2,7 +2,7 @@
   <div class="input-add-todo">
     <input type="text"/>
     <button>
-      <i class="plus"></i>
+      <font-awesome-icon class="plus" icon="fa-solid fa-plus" />
     </button>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
 .input-add-todo .plus {
   display: block;
   width: 100%;
-  height: 100%;
+  height: 60%;
   background: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
   background-size: 50% 2px, 2px 50%;
   background-position: center;
