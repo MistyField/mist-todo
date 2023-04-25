@@ -9,6 +9,7 @@ module.exports = defineConfig({
   },
   pluginOptions:{
     electronBuilder:{
+      customFileProtocol: "./",
       nodeIntegration:true,
       builderOptions: {
         mac: {
