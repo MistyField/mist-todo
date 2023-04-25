@@ -47,6 +47,9 @@ export default {
 </script>
 
 <style scoped>
+.v-footer{
+  background-color: rgba(245, 246, 252,50%);
+}
 span{
   font-family: Quicksand;
   font-size: 0.8rem;
