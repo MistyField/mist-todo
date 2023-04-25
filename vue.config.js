@@ -9,7 +9,18 @@ module.exports = defineConfig({
   },
   pluginOptions:{
     electronBuilder:{
-      nodeIntegration:true
+      nodeIntegration:true,
+      builderOptions: {
+        mac: {
+          icon: 'build/icons/icon.icns'
+        },
+        win: {
+          icon: 'build/icons/icon.ico'
+        },
+        linux: {
+          icon: 'build/icons/1024x1024.png'
+        },
+      }
     }
   }
 })

@@ -66,6 +66,7 @@ export default {
 </script>
 
 <style>
+::-webkit-scrollbar { display: none; }
 v-app {
   min-height: 100vh;
 }
