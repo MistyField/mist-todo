@@ -19,7 +19,7 @@ module.exports = defineConfig({
           icon: 'build/icons/icon.ico'
         },
         linux: {
-          icon: 'build/icons/1024x1024.png'
+          icon: 'build/icons/icon.png'
         },
       }
     }

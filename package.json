@@ -2,6 +2,9 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "author": "MistyField <zhiyuechen20@gmail.com>",
+  "homepage": "https://github.com/MistyField/mist-todo",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
