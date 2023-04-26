@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <TodoAlert></TodoAlert>
     <v-main>
       <main>
         <div class="container">
@@ -24,15 +25,18 @@ import '@/assets/fonts/fonts.css'
 import AddTodo from "@/components/AddTodo.vue";
 import AddPostit from "@/components/AddPostit.vue";
 import PageFooter from "@/components/PageFooter.vue";
+import TodoAlert from "@/components/TodoAlert.vue";
 export default {
   name: 'App',
   components: {
+    TodoAlert,
     PageFooter,
     AddTodo,
     AddPostit
   },
   data() {
     return {
+      alert: false,
       gettime: "",
     };
   },
@@ -57,7 +61,6 @@ export default {
     currentTime() {
       setInterval(this.getTime, 1000);
     },
-
   },
   mounted() {
     this.currentTime();

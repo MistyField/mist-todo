@@ -1,15 +1,18 @@
 <template>
-  <div class="input-add-todo">
-    <date-picker v-model="date" mode="dateTime" :min-date="new Date()" :attributes='attrs' color="indigo" is24hr>
-    </date-picker>
-    <input type="text"/>
-    <button @click.stop="addTodo">
-      <font-awesome-icon class="plus" icon="fa-solid fa-plus" />
-    </button>
+  <div>
+    <div class="input-add-todo">
+      <date-picker v-model="date" mode="dateTime" :min-date="new Date()" :attributes='attrs' color="indigo" is24hr>
+      </date-picker>
+      <input type="text" v-model="todoContent"/>
+      <button @click.stop="addTodo">
+        <font-awesome-icon class="plus" icon="fa-solid fa-plus" />
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import {EventBus} from "@/utils/EventBus";
 export default {
   name: "AddTodo",
   data() {
@@ -22,11 +25,20 @@ export default {
           dates: new Date(),
         },
       ],
+      todoContent:''
     }
   },
   methods:{
     addTodo() {
-      console.log(this.date);
+      EventBus.$emit('toggle-alert', false,'');
+      const curTime = new Date();
+      const curTimestamp = curTime.getTime()
+      if (this.todoContent === ''){
+        EventBus.$emit('toggle-alert', true,'empty-content');
+      }
+      if (this.date.getTime()<curTimestamp){
+        EventBus.$emit('toggle-alert', true,'err-deadline');
+      }
     },
   }
 }
