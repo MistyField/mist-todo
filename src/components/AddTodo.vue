@@ -1,7 +1,9 @@
 <template>
   <div class="input-add-todo">
+    <date-picker v-model="date" mode="dateTime" :min-date="new Date()" :attributes='attrs' color="indigo" is24hr>
+    </date-picker>
     <input type="text"/>
-    <button>
+    <button @click.stop="addTodo">
       <font-awesome-icon class="plus" icon="fa-solid fa-plus" />
     </button>
   </div>
@@ -10,6 +12,23 @@
 <script>
 export default {
   name: "AddTodo",
+  data() {
+    return {
+      date: new Date(),
+      attrs: [
+        {
+          key: 'today',
+          dot: true,
+          dates: new Date(),
+        },
+      ],
+    }
+  },
+  methods:{
+    addTodo() {
+      console.log(this.date);
+    },
+  }
 }
 </script>
 

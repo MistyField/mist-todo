@@ -55,7 +55,7 @@ export default {
       _this.gettime = yy + '-' + mm + '-' + dd + ' ' + hh + ':' + mf + ':' + ss;
     },
     currentTime() {
-      setInterval(this.getTime, 200);
+      setInterval(this.getTime, 1000);
     },
 
   },
