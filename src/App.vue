@@ -89,8 +89,8 @@ main {
 }
 h1 {
   font-family: Quicksand;
-  margin: 1.5rem 0;
-  font-size: 2rem;
+  margin: 1rem 0;
+  font-size: 1.5rem;
   color: #163268;
   text-align: center;
   user-select: none;
