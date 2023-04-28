@@ -13,7 +13,7 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "build-icon":"electron-icon-builder --input=./public/icon.png --output=build --flatten"
+    "build-icon": "electron-icon-builder --input=./public/icon.png --output=build --flatten"
   },
   "main": "background.js",
   "dependencies": {
@@ -23,10 +23,12 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^2.0.10",
     "core-js": "^3.8.3",
+    "electron-store": "^8.1.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "phantomjs": "^2.1.7",
     "v-calendar": "^2.4.1",
     "vue": "^2.6.14",
+    "vue-resource": "^1.5.3",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {

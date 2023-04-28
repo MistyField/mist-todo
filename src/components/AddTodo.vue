@@ -13,6 +13,7 @@
 
 <script>
 import {EventBus} from "@/utils/EventBus";
+import path from "path";
 export default {
   name: "AddTodo",
   data() {
@@ -39,8 +40,20 @@ export default {
       if (this.date.getTime()<curTimestamp){
         EventBus.$emit('toggle-alert', true,'err-deadline');
       }
+      console.log(123)
+      const fs = require('fs');
+      const jsonFilePath = path.join(__dirname, 'src/todos/data.json');
+      console.log(jsonFilePath);
+      const data = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8',(err)=> {
+        if (err) {
+          const emptyJson = {};
+          fs.writeFile(jsonFilePath,JSON.stringify(emptyJson));
+        }
+      }));
+      data.todo = {id:1,status:'unfinished',content:this.todoContent,deadline:this.date.getTime()};
+      fs.writeFileSync(jsonFilePath, JSON.stringify(data));
     },
-  }
+  },
 }
 </script>
 

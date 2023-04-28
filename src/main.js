@@ -22,6 +22,10 @@ Vue.component('v-calendar', Calendar)
 Vue.component('date-picker', DatePicker)
 
 Vue.config.productionTip = false
+const path = require('path');
+Vue.appSetup = Vue.prototype.$appSetup = {
+  userDataDir: path.join(process.cwd(), 'src/todos/data.json')
+}
 new Vue({
   vuetify,
   render: h => h(App)
