@@ -5,7 +5,7 @@
       <main>
         <div class="container">
             <p style="font-family: Quicksand;font-weight: bolder;font-size: 2.5rem;text-align: center;color: #163268;user-select: none">{{ gettime }}</p>
-          <v-btn color="rgb(245, 246, 252)" block style="text-transform: none;font-family: Quicksand;font-weight: bold;font-size: 1rem">
+          <v-btn class="view-all" color="rgb(245, 246, 252)" block style="text-transform: none;font-family: Quicksand;font-weight: bold;font-size: 1rem">
             <font-awesome-icon icon="fa-regular fa-calendar" style="color: #163268;" />
             <span style="color: #163268;">&nbsp;&nbsp;&nbsp;&nbsp;View your Todos and Post-its!</span>
           </v-btn>
@@ -79,7 +79,7 @@ main {
   padding: 10vh 0;
   align-items: start;
   justify-items: center;
-  background:linear-gradient(135deg, #E0C3FC 0%,#8EC5FC 100%);
+  background:linear-gradient(0deg,#fff 3%,hsla(0,0%,90%,0)),linear-gradient(135deg, #E0C3FC 0%,#8EC5FC 100%);
 }
 .container {
   width: 60%;
@@ -89,6 +89,7 @@ main {
   background-color: rgba(245, 246, 252,50%);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
+  box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px rgb(245, 246, 252);
 }
 h1 {
   font-family: Quicksand;
@@ -97,5 +98,15 @@ h1 {
   color: #163268;
   text-align: center;
   user-select: none;
+}
+.view-all{
+  transform: scale(1);
+  box-shadow: 4px 4px 7px #d9d9d9, -4px -4px 7px rgb(245, 246, 252);
+  transition: all .3s;
+}
+.view-all:active{
+  box-shadow: inset 4px 4px 7px #d9d9d9, inset -4px -4px 7px rgb(245, 246, 252);
+  transition: all .3s;
+  transform: scale(.95);
 }
 </style>

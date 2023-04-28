@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="input-add-todo">
-      <date-picker v-model="date" mode="dateTime" :min-date="new Date()" :attributes='attrs' color="indigo" is24hr>
+      <date-picker v-model="date" mode="dateTime" :min-date="new Date()" :attributes='attrs' color="indigo" style="box-shadow: 4px 4px 7px #d9d9d9, -4px -4px 7px rgb(245, 246, 252);" is24hr>
       </date-picker>
       <input type="text" v-model="todoContent"/>
       <button @click.stop="addTodo">
@@ -74,8 +74,10 @@ export default {
   font-weight: bold;
   color: #163268;
   background: rgb(245, 246, 252);
+  transition: 300ms ease-in-out;
+  box-shadow: 4px 4px 6px #d9d9d9, -4px -4px 6px rgb(245, 246, 252);
 }
-.input-add-todo input:hover{
+.input-add-todo input:focus{
   box-shadow: 0px 6px 2px -4px rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.14), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
 }
 .input-add-todo button {
@@ -89,6 +91,15 @@ export default {
   right: 0px;
   cursor: pointer;
   outline: none;
+  transform: scale(1);
+  box-shadow: 4px 4px 7px #d9d9d9, -4px -4px 7px rgb(245, 246, 252);
+  transition: all .3s;
+}
+.input-add-todo button:active {
+  background: linear-gradient(135deg, #E0C3FC 0%,#8EC5FC 100%);
+  box-shadow: inset 4px 4px 7px #d9d9d9, inset -4px -4px 7px rgb(245, 246, 252);
+  transition: all .3s;
+  transform: scale(.95);
 }
 .input-add-todo .plus {
   display: block;
@@ -98,5 +109,10 @@ export default {
   background-size: 50% 2px, 2px 50%;
   background-position: center;
   background-repeat: no-repeat;
+  transition: all .3s;
+}
+.input-add-todo button:active .plus {
+  transform: scale(.9);
+  transition: all .3s;
 }
 </style>
