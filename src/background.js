@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -9,7 +9,36 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
+ipcMain.on('load-postit-window', () => {
+  // create the window
+  let postIt = new BrowserWindow({
+    show: true,
+    width: 800,
+    height: 600,
+    minWidth: 800,
+    minHeight: 600,
+    parent:BrowserWindow.getFocusedWindow(),
+    modal:true,
+    webPreferences: {
+      enableRemoteModule: true,
+      devTools: true,
+      contextIsolation: false,
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true
+    }
+  })
+  if (process.env.WEBPACK_DEV_SERVER_URL) {
+    // Load the url of the dev server if in development mode
+    postIt.loadURL(process.env.WEBPACK_DEV_SERVER_URL + 'postIt.html')
+    if (!process.env.IS_TEST) postIt.webContents.openDevTools()
+  } else {
+    postIt.loadURL(`app://./postIt`)
+  }
 
+  postIt.on('closed', () => {
+    postIt = null
+  })
+});
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({

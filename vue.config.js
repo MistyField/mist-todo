@@ -1,6 +1,10 @@
 const { defineConfig } = require('@vue/cli-service')
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 module.exports = defineConfig({
+  pages: {
+    index: 'src/main.js',
+    postIt: 'src/views/post_it/main.js'
+  },
   transpileDependencies: [
     'vuetify'
   ],
