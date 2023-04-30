@@ -28,7 +28,7 @@ export default {
   created() {
     EventBus.$on('toggle-alert', (showAlert,err_code) => {
       if (err_code === 'err-deadline'){
-        this.errContent = 'The deadline you set needs to be later than the current time.'
+        this.errContent = 'The deadline you set should be later than the current time.'
         this.alert = showAlert;
       }
       if (err_code === 'empty-content'){

@@ -21,6 +21,12 @@ module.exports = defineConfig({
         linux: {
           icon: 'build/icons/icon.png'
         },
+        extraResources: [
+          {
+            "from": "src/todos/data.json",
+            "to": "app/data/todos/data.json"
+          }
+        ]
       }
     }
   }
