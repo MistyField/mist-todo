@@ -5,7 +5,7 @@
     <div class="doc">
       <!-- 工具栏 -->
       <Toolbar
-          style="border-bottom: 1px solid #ccc;width: 100vw;padding-left: 1rem;"
+          style="border-bottom: 1px solid #ccc;width: 100vw;"
           :editor="editor"
           :defaultConfig="toolbarConfig"
       />
