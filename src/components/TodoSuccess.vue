@@ -1,43 +1,37 @@
 <template>
   <v-alert
-      v-model="alert"
+      v-model="success"
       text="text"
-      type="error"
+      type="success"
       variant="outlined"
       border="top"
-  >
-    <p>{{this.errContent}}</p>
-    <v-btn icon @click="closeAlarm"><font-awesome-icon icon="fa-solid fa-xmark" style="color:#999;" /></v-btn>
-  </v-alert>
+  ><p>{{this.Content}}</p>
+    <v-btn icon @click="closeAlert"><font-awesome-icon icon="fa-solid fa-xmark" style="color:#999;" /></v-btn></v-alert>
 </template>
 
 <script>
 import {EventBus} from "@/utils/EventBus";
 export default {
-  name: "TodoAlert",
+  name: "TodoSuccess",
   data(){
     return{
-      errContent:'',
-      alert: false,
+      Content:'',
+      success: false,
     }
   },
   methods:{
-    closeAlarm(){
-      this.alert = false;
+    closeAlert(){
+      this.success = false;
     },
   },
   created() {
-    EventBus.$on('toggle-alert', (showAlert,err_code) => {
-      if (err_code === 'err-deadline'){
-        this.errContent = 'The deadline you set should be later than the current time.'
-        this.alert = showAlert;
-      }
-      if (err_code === 'empty-content'){
-        this.errContent = 'Todo should not be empty.'
-        this.alert = showAlert;
+    EventBus.$on('toggle-success', (showAlert,content) => {
+      if (showAlert === true){
+        this.Content = 'Your Todo "' + content + '" has been added.'
+        this.success = showAlert;
       }
       if (showAlert===false){
-        this.alert = showAlert;
+        this.success = showAlert;
       }
     });
   },

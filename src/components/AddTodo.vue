@@ -34,6 +34,7 @@ export default {
   methods:{
     addTodo() {
       EventBus.$emit('toggle-alert', false,'');
+      EventBus.$emit('toggle-success', false,'');
       const curTime = new Date();
       const curTimestamp = curTime.getTime()
       if (this.todoContent === ''){
@@ -56,6 +57,7 @@ export default {
         curId = maxId + 1;
         data.push({id: curId, status: 'unfinished', content: this.todoContent, deadline: this.date.getTime()});
         fs.writeFileSync(jsonFilePath, JSON.stringify(data));
+        EventBus.$emit('toggle-success', true,this.todoContent);
       }
     },
   },
@@ -97,12 +99,12 @@ export default {
   outline: none;
   transform: scale(1);
   box-shadow: 3px 3px 5px #d9d9d9, -3px -3px 5px rgb(245, 246, 252);
-  transition: all .3s;
+  transition: all ease-in-out .3s;
 }
 .input-add-todo button:active {
   background: linear-gradient(135deg, #E0C3FC 0%,#8EC5FC 100%);
   box-shadow: inset 3px 3px 5px #d9d9d9, inset -3px -3px 5px rgb(245, 246, 252);
-  transition: all .3s;
+  transition: all ease-in-out .3s;
   transform: scale(.95);
 }
 .input-add-todo .plus {
@@ -113,10 +115,10 @@ export default {
   background-size: 50% 2px, 2px 50%;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all .3s;
+  transition: all ease-in-out .3s;
 }
 .input-add-todo button:active .plus {
   transform: scale(.9);
-  transition: all .3s;
+  transition: all ease-in-out .3s;
 }
 </style>

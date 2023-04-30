@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <TodoAlert></TodoAlert>
+    <TodoSuccess></TodoSuccess>
     <v-main>
       <main>
         <div class="container">
@@ -26,9 +27,11 @@ import AddTodo from "@/components/AddTodo.vue";
 import AddPostit from "@/components/AddPostit.vue";
 import PageFooter from "@/components/PageFooter.vue";
 import TodoAlert from "@/components/TodoAlert.vue";
+import TodoSuccess from "@/components/TodoSuccess.vue";
 export default {
   name: 'App',
   components: {
+    TodoSuccess,
     TodoAlert,
     PageFooter,
     AddTodo,
@@ -168,11 +171,11 @@ h1 {
 .view-all{
   transform: scale(1);
   box-shadow: 4px 4px 7px #d9d9d9, -4px -4px 7px rgb(245, 246, 252);
-  transition: all .3s;
+  transition: all ease-in-out .3s;
 }
 .view-all:active{
   box-shadow: inset 4px 4px 7px #d9d9d9, inset -4px -4px 7px rgb(245, 246, 252);
-  transition: all .3s;
+  transition: all ease-in-out .3s;
   transform: scale(.95);
 }
 </style>
