@@ -32,7 +32,7 @@ ipcMain.on('load-postit-window', () => {
     postIt.loadURL(process.env.WEBPACK_DEV_SERVER_URL + 'postIt.html')
     if (!process.env.IS_TEST) postIt.webContents.openDevTools()
   } else {
-    postIt.loadURL(`app://./postIt`)
+    postIt.loadURL(`app://./postIt.html`)
   }
 
   postIt.on('closed', () => {
