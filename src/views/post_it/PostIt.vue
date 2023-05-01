@@ -19,7 +19,6 @@
           style="height: 600px; overflow-y: hidden;width: 100%"
           :defaultConfig="editorConfig"
           v-model="html"
-          @onChange="onChange"
           @onCreated="onCreated"
       />
       </div>
@@ -44,7 +43,13 @@ import PostItSuccess from "@/components/PostItSuccess.vue";
 import { i18nChangeLanguage } from '@wangeditor/editor'
 import path from "path";
 import fs from "fs";
-i18nChangeLanguage('en')
+const { app } = require('electron').remote;
+if (app.getLocale()==='zh-CN'){
+  i18nChangeLanguage('zh-CN')
+}
+else {
+  i18nChangeLanguage('en')
+}
 Boot.registerModule(formulaModule)
 Boot.registerModule(markdownModule)
 export default {

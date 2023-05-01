@@ -6,7 +6,7 @@
       <main>
         <div class="container">
             <p style="font-family: Quicksand;font-weight: bolder;font-size: 2.5rem;text-align: center;color: #163268;user-select: none">{{ gettime }}</p>
-          <v-btn class="view-all" color="rgb(245, 246, 252)" block style="text-transform: none;font-family: Quicksand;font-weight: bold;font-size: 1rem">
+          <v-btn @click="openEdit" class="view-all" color="rgb(245, 246, 252)" block style="text-transform: none;font-family: Quicksand;font-weight: bold;font-size: 1rem">
             <font-awesome-icon icon="fa-regular fa-calendar" style="color: #163268;" />
             <span style="color: #163268;">&nbsp;&nbsp;&nbsp;&nbsp;View your Todos and Post-its!</span>
           </v-btn>
@@ -28,6 +28,7 @@ import AddPostit from "@/components/AddPostit.vue";
 import PageFooter from "@/components/PageFooter.vue";
 import TodoAlert from "@/components/TodoAlert.vue";
 import TodoSuccess from "@/components/TodoSuccess.vue";
+import {ipcRenderer} from "electron";
 export default {
   name: 'App',
   components: {
@@ -64,6 +65,9 @@ export default {
     currentTime() {
       setInterval(this.getTime, 1000);
     },
+    openEdit(){
+      ipcRenderer.send('load-edit-window');
+    }
   },
   mounted() {
     this.currentTime();

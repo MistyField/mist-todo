@@ -39,6 +39,36 @@ ipcMain.on('load-postit-window', () => {
     postIt = null
   })
 });
+ipcMain.on('load-edit-window', () => {
+  // create the window
+  let EditPage = new BrowserWindow({
+    show: true,
+    width: 800,
+    height: 600,
+    minWidth: 800,
+    minHeight: 600,
+    parent:BrowserWindow.getFocusedWindow(),
+    modal:true,
+    webPreferences: {
+      enableRemoteModule: true,
+      devTools: true,
+      contextIsolation: false,
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true
+    }
+  })
+  if (process.env.WEBPACK_DEV_SERVER_URL) {
+    // Load the url of the dev server if in development mode
+    EditPage.loadURL(process.env.WEBPACK_DEV_SERVER_URL + 'editPage.html')
+    if (!process.env.IS_TEST) EditPage.webContents.openDevTools()
+  } else {
+    EditPage.loadURL(`app://./editPage.html`)
+  }
+
+  EditPage.on('closed', () => {
+    EditPage = null
+  })
+});
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
