@@ -29,6 +29,10 @@ module.exports = defineConfig({
           {
             "from": "src/todos/data.json",
             "to": "app/data/todos/data.json"
+          },
+          {
+            "from": "src/postits/data.json",
+            "to": "app/data/postits/data.json"
           }
         ]
       }

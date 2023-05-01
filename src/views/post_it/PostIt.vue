@@ -10,6 +10,7 @@
           style="border-bottom: 1px solid #ccc;width: 100vw;"
           :editor="editor"
           :defaultConfig="toolbarConfig"
+          class="toolbar-container"
       />
       <!-- 编辑器 -->
       <div class="editor-container" style="width: 60%;" >
@@ -40,6 +41,10 @@ import '@/assets/fonts/fonts.css'
 import PostItAlert from "@/components/PostItAlert.vue";
 import {EventBus} from "@/utils/EventBus";
 import PostItSuccess from "@/components/PostItSuccess.vue";
+import { i18nChangeLanguage } from '@wangeditor/editor'
+import path from "path";
+import fs from "fs";
+i18nChangeLanguage('en')
 Boot.registerModule(formulaModule)
 Boot.registerModule(markdownModule)
 export default {
@@ -83,25 +88,25 @@ export default {
         EventBus.$emit('toggle-alert-postit', true,'empty-title');
       }
       else {
+        const jsonFilePath = path.resolve(__dirname, '../app/data/postits/data.json');
+        const data = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+        let curId = 0;
+        let maxId = -1;
+        for (var key in data){
+          let id = data[key].id;
+          if (id > maxId) {
+            maxId = id;
+          }
+        }
+        curId = maxId + 1;
+        console.log({'id':curId,'date':new Date().getTime(),'content':this.editor.getHtml()})
+        data.push({'id':curId,'date':new Date().getTime(),'content':this.editor.getHtml()})
+        fs.writeFileSync(jsonFilePath, JSON.stringify(data));
         EventBus.$emit('toggle-success-postit', true,this.title);
       }
     },
     onCreated(editor) {
       this.editor = Object.seal(editor); // 【注意】一定要用 Object.seal() 否则会报错
-    },
-    onChange(editor) {
-      console.log("onChange", editor.getHtml()); // onChange 时获取编辑器最新内容
-    },
-    getEditorText() {
-      const editor = this.editor;
-      if (editor == null) return;
-      console.log(editor.getText()); // 执行 editor API
-    },
-    printEditorHtml() {
-      const editor = this.editor;
-      if (editor == null) return;
-
-      console.log(editor.getHtml()); // 执行 editor API
     },
   },
   beforeDestroy() {
@@ -111,10 +116,9 @@ export default {
   },
 };
 </script>
-<style src="@wangeditor/editor/dist/css/style.css"></style>
 <style scoped>
-v-app {
-  min-height: 100vh;
+.v-application {
+  max-height: 100vh;
 }
 .container{
   width: 100vw;
@@ -226,3 +230,5 @@ input{
   border-bottom:1px solid #e8e8e8
 }
 </style>
+<style src="@wangeditor/editor/dist/css/style.css"></style>
+<style src="./scrollbar.css"></style>
