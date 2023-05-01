@@ -8,10 +8,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faEnvelope,faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope,faUpload,faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faGithub,faWeibo } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faEnvelope,faGithub,faWeibo,faUpload)
+library.add(faEnvelope,faGithub,faWeibo,faUpload,faXmark)
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)

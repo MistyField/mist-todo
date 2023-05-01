@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <PostItAlert></PostItAlert>
+    <PostItSuccess></PostItSuccess>
     <v-main>
   <div class="container">
     <div class="doc">
@@ -11,7 +13,7 @@
       />
       <!-- 编辑器 -->
       <div class="editor-container" style="width: 60%;" >
-      <div class="title-container"><input placeholder="Title..." style="background-color: white;width: 100%;"></div>
+      <div class="title-container"><input v-model="title" placeholder="Title..." style="background-color: white;width: 100%;"></div>
       <Editor
           style="height: 600px; overflow-y: hidden;width: 100%"
           :defaultConfig="editorConfig"
@@ -21,7 +23,7 @@
       />
       </div>
     </div>
-    <v-btn class="submit" color="rgb(245, 246, 252)" style="text-transform: none;font-family: Quicksand;font-weight: bold;font-size: 1rem"><font-awesome-icon icon="fa-solid fa-upload" style="color:#163268;"/><span>Submit</span></v-btn>
+    <v-btn class="submit" @click="submitPostIt" color="rgb(245, 246, 252)" style="text-transform: none;font-family: Quicksand;font-weight: bold;font-size: 1rem"><font-awesome-icon icon="fa-solid fa-upload" style="color:#163268;"/><span>Submit</span></v-btn>
   </div>
     </v-main>
     <PageFooter></PageFooter>
@@ -35,23 +37,28 @@ import { Boot } from '@wangeditor/editor'
 import formulaModule from '@wangeditor/plugin-formula'
 import markdownModule from '@wangeditor/plugin-md'
 import '@/assets/fonts/fonts.css'
+import PostItAlert from "@/components/PostItAlert.vue";
+import {EventBus} from "@/utils/EventBus";
+import PostItSuccess from "@/components/PostItSuccess.vue";
 Boot.registerModule(formulaModule)
 Boot.registerModule(markdownModule)
 export default {
   name: "PostIt",
-  components: {PageFooter, Editor, Toolbar },
+  components: {PostItSuccess, PostItAlert, PageFooter, Editor, Toolbar },
   data() {
     return {
+      title:'',
       editor: null,
       html: "",
       toolbarConfig: {
         // toolbarKeys: [ /* 显示哪些菜单，如何排序、分组 */ ],
-        // excludeKeys: [ /* 隐藏哪些菜单 */ ],
+        excludeKeys: [ 'fullScreen','group-image','group-video' ],
         insertKeys: {
-          index: 0,
+          index: 25,
           keys: [
-            'insertFormula', // “插入公式”菜单
-            // 'editFormula' // “编辑公式”菜单
+            "insertImage",
+            'insertVideo',
+            'insertFormula', // “插入公式”菜单,
           ],
         },
       },
@@ -69,6 +76,16 @@ export default {
     };
   },
   methods: {
+    submitPostIt(){
+      EventBus.$emit('toggle-alert-postit', false,'');
+      EventBus.$emit('toggle-success-postit', false,'');
+      if (this.title===''){
+        EventBus.$emit('toggle-alert-postit', true,'empty-title');
+      }
+      else {
+        EventBus.$emit('toggle-success-postit', true,this.title);
+      }
+    },
     onCreated(editor) {
       this.editor = Object.seal(editor); // 【注意】一定要用 Object.seal() 否则会报错
     },
@@ -78,7 +95,6 @@ export default {
     getEditorText() {
       const editor = this.editor;
       if (editor == null) return;
-
       console.log(editor.getText()); // 执行 editor API
     },
     printEditorHtml() {
