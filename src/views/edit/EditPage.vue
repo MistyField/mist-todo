@@ -34,7 +34,7 @@
                     <div>
                       <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">{{ item.content }}</h1>
                     </div>
-                    <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;user-select: none;">10hr left</v-list-item-subtitle>
+                    <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;user-select: none;">{{calTimeInterval(item)}}</v-list-item-subtitle>
                   </v-card-text>
                   <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
                     <v-btn class="align-self-end"><span style="font-weight: bold;color: #163268">I'm done</span></v-btn>
@@ -97,6 +97,29 @@ export default {
     todos:[]
   }),
   methods:{
+    calTimeInterval(todo){
+      let curDate = new Date();
+      let timeInterval = todo.deadline - curDate.getTime();
+      let days = Math.floor(timeInterval/(24*3600*1000));
+      let leave1 = timeInterval%(24*3600*1000);
+      let hours = Math.floor(leave1/(3600*1000));
+      let leave2 = leave1%(3600*1000);
+      let minutes = Math.floor(leave2/(60*1000));
+      if (timeInterval > 0){
+        if (days ===0){
+          if (hours === 0){
+            return minutes + 'min' + ' left'
+          }
+          return hours + 'h' + minutes + 'min' + ' left'
+        }
+        else {
+          return days + 'd' + hours + 'h' + minutes + 'min' + ' left'
+        }
+      }
+      else {
+        return 'Overdue'
+      }
+    },
   },
   created() {
     const jsonFilePath = path.resolve(__dirname, '../app/data/todos/data.json');
