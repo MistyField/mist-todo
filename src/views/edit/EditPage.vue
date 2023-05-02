@@ -1,14 +1,14 @@
 <template>
 <v-app>
   <v-main class="container">
-      <v-card class="type-tab" style="width: 80vw;border-radius: 5px">
+      <v-card class="type-tab" style="width: 60vw;border-radius: 5px">
         <v-tabs
             v-model="tab"
             align-tabs="center"
             grow
             centered
             color="#163268"
-            bg-color="rgba(245, 246, 252,25%)"
+            background-color="rgba(245, 246, 252,25%)"
         >
           <v-tab :value="1"><font-awesome-icon icon="fa-regular fa-calendar" style="font-size: 1.5rem" /><span>&nbsp;Todo</span></v-tab>
           <v-tab :value="2"><font-awesome-icon icon="fa-regular fa-note-sticky" style="font-size: 1.5rem" /><span>&nbsp;Post it</span></v-tab>
@@ -116,6 +116,9 @@ span{
   font-family: Quicksand;
   font-size: 1.5rem;
   text-transform: none;
+}
+.type-tab{
+  background-color: rgba(245, 246, 252,25%);
 }
 </style>
 <style src="./scrollbar.css"></style>
