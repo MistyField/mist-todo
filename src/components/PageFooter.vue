@@ -56,4 +56,8 @@ span{
   color: #163268;
   user-select: none;
 }
+v-btn{
+  transition-delay:0s;
+  transition-duration: 0s;
+}
 </style>
