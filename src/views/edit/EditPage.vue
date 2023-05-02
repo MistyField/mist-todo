@@ -28,33 +28,32 @@
             </v-tabs>
             <v-tabs-items v-model="subtab" style="background-color: rgba(245, 246, 252,50%);">
               <v-tab-item key="unfinished">
-                <v-card flat color="rgba(245, 246, 252,25%)" class="d-flex flex-row justify-center align-center bordered">
+                <template v-for="item in todos.slice().reverse()">
+                <v-card flat color="rgba(245, 246, 252,25%)" class="d-flex flex-row justify-center align-center bordered" v-if="item.status==='unfinished'" :key="item.id">
                   <v-card-text>
                     <div>
-                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268">吃饭</h1>
+                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">{{ item.content }}</h1>
                     </div>
-                    <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;">10hr left</v-list-item-subtitle>
+                    <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;user-select: none;">10hr left</v-list-item-subtitle>
                   </v-card-text>
                   <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
                     <v-btn class="align-self-end"><span style="font-weight: bold;color: #163268">I'm done</span></v-btn>
                   </v-card-actions>
                 </v-card>
+                </template>
               </v-tab-item>
               <v-tab-item key="completed">
-                <v-card flat color="rgba(245, 246, 252,25%)">
+                <template v-for="item in todos.slice().reverse()">
+                <v-card flat color="rgba(245, 246, 252,25%)" v-if="item.status==='done'" :key="item.id">
                   <v-card-text>
                     <div>
-                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;font-style: italic;text-decoration:line-through;">run</h1>
+                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;font-style: italic;text-decoration:line-through;user-select: none">
+                        {{ item.content }}
+                      </h1>
                     </div>
                   </v-card-text>
                 </v-card>
-                <v-card flat color="rgba(245, 246, 252,25%)">
-                  <v-card-text>
-                    <div>
-                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;font-style: italic;text-decoration:line-through;">run</h1>
-                    </div>
-                  </v-card-text>
-                </v-card>
+                </template>
               </v-tab-item>
             </v-tabs-items>
           </v-tab-item>
@@ -62,7 +61,7 @@
             <v-card flat color="rgba(245, 246, 252,25%)" class="d-flex flex-row justify-center align-center">
               <v-card-text>
                 <div>
-                  <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268">吃饭</h1>
+                  <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">吃饭</h1>
                 </div>
               </v-card-text>
               <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
@@ -80,14 +79,30 @@
 <script>
 import PageFooter from "@/components/PageFooter.vue";
 import '@/assets/fonts/fonts.css'
+import path from "path";
+import fs from "fs";
 
 export default {
   name: "EditPage",
   components: { PageFooter},
+  props: {
+    fruits: {
+      type: Array,
+      required: true
+    }
+  },
   data: () => ({
     tab: null,
     subtab:null,
+    todos:[]
   }),
+  methods:{
+  },
+  created() {
+    const jsonFilePath = path.resolve(__dirname, '../app/data/todos/data.json');
+    const todoData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+    this.todos = todoData;
+  }
 }
 </script>
 
