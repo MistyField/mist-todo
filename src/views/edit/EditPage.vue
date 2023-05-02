@@ -1,7 +1,7 @@
 <template>
 <v-app>
-  <v-main class="container">
-      <v-card class="type-tab" style="width: 60vw;border-radius: 5px">
+  <v-main class="container" style="padding: 10vh 0;">
+      <v-card class="type-tab" style="width: 60vw;border-radius: 5px;box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px rgb(245, 246, 252);">
         <v-tabs
             v-model="tab"
             align-tabs="center"
@@ -10,9 +10,67 @@
             color="#163268"
             background-color="rgba(245, 246, 252,25%)"
         >
-          <v-tab :value="1"><font-awesome-icon icon="fa-regular fa-calendar" style="font-size: 1.5rem" /><span>&nbsp;Todo</span></v-tab>
-          <v-tab :value="2"><font-awesome-icon icon="fa-regular fa-note-sticky" style="font-size: 1.5rem" /><span>&nbsp;Post it</span></v-tab>
+          <v-tab key="todo"><font-awesome-icon icon="fa-regular fa-calendar" style="font-size: 1.5rem" /><span style="font-size: 1.5rem;font-weight: bold;">&nbsp;Todo</span></v-tab>
+          <v-tab key="post-it"><font-awesome-icon icon="fa-regular fa-note-sticky" style="font-size: 1.5rem" /><span style="font-size: 1.5rem;font-weight: bold;">&nbsp;Post it</span></v-tab>
         </v-tabs>
+        <v-tabs-items v-model="tab" style="background-color: rgba(245, 246, 252,50%);">
+          <v-tab-item key="todo">
+            <v-tabs
+                v-model="subtab"
+                align-tabs="center"
+                grow
+                centered
+                color="#163268"
+                background-color="rgba(245, 246, 252,10%)"
+            >
+              <v-tab key="unfinished"><font-awesome-icon icon="fa-solid fa-table-list" style="font-size: 1rem" /><span style="font-size: 1rem;font-weight: bold;">&nbsp;Unfinished</span></v-tab>
+              <v-tab key="completed"><font-awesome-icon icon="fa-regular fa-calendar-check" style="font-size: 1rem" /><span style="font-size: 1rem;font-weight: bold;">&nbsp;Completed</span></v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="subtab" style="background-color: rgba(245, 246, 252,50%);">
+              <v-tab-item key="unfinished">
+                <v-card flat color="rgba(245, 246, 252,25%)" class="d-flex flex-row justify-center align-center bordered">
+                  <v-card-text>
+                    <div>
+                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268">吃饭</h1>
+                    </div>
+                    <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;">10hr left</v-list-item-subtitle>
+                  </v-card-text>
+                  <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
+                    <v-btn class="align-self-end"><span style="font-weight: bold;color: #163268">I'm done</span></v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item key="completed">
+                <v-card flat color="rgba(245, 246, 252,25%)">
+                  <v-card-text>
+                    <div>
+                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;font-style: italic;text-decoration:line-through;">run</h1>
+                    </div>
+                  </v-card-text>
+                </v-card>
+                <v-card flat color="rgba(245, 246, 252,25%)">
+                  <v-card-text>
+                    <div>
+                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;font-style: italic;text-decoration:line-through;">run</h1>
+                    </div>
+                  </v-card-text>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
+          </v-tab-item>
+          <v-tab-item key="post-it">
+            <v-card flat color="rgba(245, 246, 252,25%)" class="d-flex flex-row justify-center align-center">
+              <v-card-text>
+                <div>
+                  <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268">吃饭</h1>
+                </div>
+              </v-card-text>
+              <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
+                <v-btn class="align-self-end"><span style="font-weight: bold;color: #163268">Edit</span></v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
       </v-card>
   </v-main>
   <page-footer></page-footer>
@@ -21,12 +79,14 @@
 
 <script>
 import PageFooter from "@/components/PageFooter.vue";
+import '@/assets/fonts/fonts.css'
 
 export default {
   name: "EditPage",
   components: { PageFooter},
   data: () => ({
     tab: null,
+    subtab:null,
   }),
 }
 </script>
@@ -114,7 +174,6 @@ v-app {
 }
 span{
   font-family: Quicksand;
-  font-size: 1.5rem;
   text-transform: none;
 }
 .type-tab{

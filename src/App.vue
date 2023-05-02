@@ -7,7 +7,7 @@
         <div class="container">
             <p style="font-family: Quicksand;font-weight: bolder;font-size: 2.5rem;text-align: center;color: #163268;user-select: none">{{ gettime }}</p>
           <v-btn @click="openEdit" class="view-all" color="rgb(245, 246, 252)" block style="text-transform: none;font-family: Quicksand;font-weight: bold;font-size: 1rem">
-            <font-awesome-icon icon="fa-regular fa-calendar" style="color: #163268;" />
+            <font-awesome-icon icon="fa-regular fa-bookmark" style="color: #163268;" />
             <span style="color: #163268;">&nbsp;&nbsp;&nbsp;&nbsp;View your Todos and Post-its!</span>
           </v-btn>
             <h1>🥳Add your Todo!</h1>
