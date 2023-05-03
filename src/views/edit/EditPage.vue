@@ -41,6 +41,15 @@
                   </v-card-actions>
                 </v-card>
                 </template>
+                <v-card flat color="rgba(245, 246, 252,25%)" v-if="todos.length===0">
+                  <v-card-text>
+                    <div>
+                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">
+                        oups!nothing here...
+                      </h1>
+                    </div>
+                  </v-card-text>
+                </v-card>
               </v-tab-item>
               <v-tab-item key="completed">
                 <template v-for="item in todos.slice().reverse()">
@@ -54,6 +63,15 @@
                   </v-card-text>
                 </v-card>
                 </template>
+                <v-card flat color="rgba(245, 246, 252,25%)" v-if="todos.length===0">
+                  <v-card-text>
+                    <div>
+                      <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">
+                        oups!nothing here...
+                      </h1>
+                    </div>
+                  </v-card-text>
+                </v-card>
               </v-tab-item>
             </v-tabs-items>
           </v-tab-item>
@@ -70,6 +88,15 @@
               <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
                 <v-btn class="align-self-end"><span style="font-weight: bold;color: #163268">Edit</span></v-btn>
               </v-card-actions>
+            </v-card>
+            <v-card flat color="rgba(245, 246, 252,25%)" v-if="postits.length===0">
+              <v-card-text>
+                <div>
+                  <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">
+                    oups!nothing here...
+                  </h1>
+                </div>
+              </v-card-text>
             </v-card>
           </v-tab-item>
         </v-tabs-items>
