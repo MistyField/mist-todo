@@ -104,8 +104,7 @@ export default {
           }
         }
         curId = maxId + 1;
-        console.log({'id':curId,'date':new Date().getTime(),'content':this.editor.getHtml()})
-        data.push({'id':curId,'date':new Date().getTime(),'content':this.editor.getHtml()})
+        data.push({'id':curId,'date':new Date().getTime(),'content':this.editor.getHtml(),'title':this.title})
         fs.writeFileSync(jsonFilePath, JSON.stringify(data));
         EventBus.$emit('toggle-success-postit', true,this.title);
       }

@@ -58,11 +58,14 @@
             </v-tabs-items>
           </v-tab-item>
           <v-tab-item key="post-it">
-            <v-card flat color="rgba(245, 246, 252,25%)" class="d-flex flex-row justify-center align-center">
+            <v-card flat v-for="item in postits.slice().reverse()" :key="item.id" color="rgba(245, 246, 252,25%)" class="d-flex flex-row justify-center align-center">
               <v-card-text>
                 <div>
-                  <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">吃饭</h1>
+                  <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">{{item.title}}</h1>
                 </div>
+                <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;user-select: none;">
+                  {{getDate(item)}}
+                </v-list-item-subtitle>
               </v-card-text>
               <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
                 <v-btn class="align-self-end"><span style="font-weight: bold;color: #163268">Edit</span></v-btn>
@@ -85,16 +88,11 @@ import fs from "fs";
 export default {
   name: "EditPage",
   components: { PageFooter},
-  props: {
-    fruits: {
-      type: Array,
-      required: true
-    }
-  },
   data: () => ({
     tab: null,
     subtab:null,
-    todos:[]
+    todos:[],
+    postits:[]
   }),
   methods:{
     calTimeInterval(todo){
@@ -120,11 +118,21 @@ export default {
         return 'Overdue'
       }
     },
+    getDate(postit){
+      let date = new Date(postit.date);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      return year + '-' + month + '-' + day
+    }
   },
   created() {
-    const jsonFilePath = path.resolve(__dirname, '../app/data/todos/data.json');
-    const todoData = JSON.parse(fs.readFileSync(jsonFilePath, 'utf-8'));
+    const todojsonFilePath = path.resolve(__dirname, '../app/data/todos/data.json');
+    const todoData = JSON.parse(fs.readFileSync(todojsonFilePath, 'utf-8'));
     this.todos = todoData;
+    const postitjsonFilePath = path.resolve(__dirname, '../app/data/postits/data.json');
+    const postitData = JSON.parse(fs.readFileSync(postitjsonFilePath, 'utf-8'));
+    this.postits = postitData
   }
 }
 </script>
