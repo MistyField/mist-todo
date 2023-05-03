@@ -25,21 +25,17 @@
 </template>
 
 <script>
-
-
+const shell = require('electron').shell;
 export default {
   name: "PageFooter",
   methods: {
     openGithub() {
-      const shell = require('electron').shell;
       shell.openExternal('https://github.com/MistyField');
     },
     openWeibo() {
-      const shell = require('electron').shell;
       shell.openExternal('https://weibo.com/u/5242849565');
     },
     openEmail() {
-      const shell = require('electron').shell;
       shell.openExternal('mailto:zhiyuechen20@gmail.com');
     },
   }
