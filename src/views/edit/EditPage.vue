@@ -82,13 +82,13 @@
                   <h1 style="font-family: Opensans,Smileysans;font-weight: bold;font-size: 1rem;color: #163268;user-select: none">{{item.title}}</h1>
                 </div>
                 <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;user-select: none;">
-                  {{getDate(item)}}
+                  Last Edit: {{getDate(item)}}
                 </v-list-item-subtitle>
               </v-card-text>
               <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
                 <div style="display: inherit">
-                <v-btn class="align-self-end" style="margin: 10px"><font-awesome-icon icon="fa-regular fa-pen-to-square" style="color: #163268" /><span style="font-weight: bold;color: #163268">Edit</span></v-btn>
-                <v-btn class="align-self-end" style="margin: 10px"><font-awesome-icon icon="fa-solid fa-trash" style="color: #163268" /><span style="font-weight: bold;color: #163268">Delete</span></v-btn>
+                <v-btn @click="openSubEdit(item)" class="align-self-end" style="margin: 10px"><font-awesome-icon icon="fa-regular fa-pen-to-square" style="color: #163268" /><span style="font-weight: bold;color: #163268">Edit</span></v-btn>
+                <v-btn @click="deletePostit(item)" class="align-self-end" style="margin: 10px"><font-awesome-icon icon="fa-solid fa-trash" style="color: #163268" /><span style="font-weight: bold;color: #163268">Delete</span></v-btn>
                 </div>
               </v-card-actions>
             </v-card>
@@ -114,6 +114,7 @@ import PageFooter from "@/components/PageFooter.vue";
 import '@/assets/fonts/fonts.css'
 import path from "path";
 import fs from "fs";
+import {ipcRenderer} from "electron";
 
 export default {
   name: "EditPage",
@@ -162,6 +163,19 @@ export default {
       fs.writeFileSync(todojsonFilePath, JSON.stringify(todoData));
       this.todos = todoData;
     },
+    openSubEdit(postit) {
+      ipcRenderer.send('load-subedit-window',postit.id)
+    },
+    deletePostit(postit){
+      const postitjsonFilePath = path.resolve(__dirname, '../app/data/postits/data.json');
+      let postitData = JSON.parse(fs.readFileSync(postitjsonFilePath, 'utf-8'));
+      postitData.splice(postit.id,1)
+      for (var i=0;i<postitData.length;i++){
+        postitData.id = i
+      }
+      fs.writeFileSync(postitjsonFilePath, JSON.stringify(postitData));
+      this.postits = postitData
+    }
   },
   created() {
     const todojsonFilePath = path.resolve(__dirname, '../app/data/todos/data.json');

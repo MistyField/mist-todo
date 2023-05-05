@@ -69,6 +69,40 @@ ipcMain.on('load-edit-window', () => {
     EditPage = null
   })
 });
+let SubEditPage
+ipcMain.on('load-subedit-window', (event, args) => {
+  // create the window
+  SubEditPage = new BrowserWindow({
+    show: true,
+    width: 800,
+    height: 600,
+    minWidth: 800,
+    minHeight: 600,
+    parent:BrowserWindow.getFocusedWindow(),
+    modal:true,
+    webPreferences: {
+      enableRemoteModule: true,
+      devTools: true,
+      contextIsolation: false,
+      nodeIntegration: true,
+      nodeIntegrationInWorker: true
+    }
+  })
+  ipcMain.on('subedit-accomplish',() => {
+        SubEditPage.webContents.send('send-postit',args)
+      })
+  if (process.env.WEBPACK_DEV_SERVER_URL) {
+    // Load the url of the dev server if in development mode
+    SubEditPage.loadURL(process.env.WEBPACK_DEV_SERVER_URL + 'subEdit.html')
+    if (!process.env.IS_TEST) SubEditPage.webContents.openDevTools()
+  } else {
+    SubEditPage.loadURL(`app://./subEdit.html`)
+  }
+
+  SubEditPage.on('closed', () => {
+    SubEditPage = null
+  })
+});
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({

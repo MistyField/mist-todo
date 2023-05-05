@@ -4,7 +4,8 @@ module.exports = defineConfig({
   pages: {
     index: 'src/main.js',
     postIt: 'src/views/post_it/main.js',
-    editPage:'src/views/edit/main.js'
+    editPage:'src/views/edit/main.js',
+    subEdit:'src/views/sub_edit/main.js',
   },
   transpileDependencies: [
     'vuetify'
