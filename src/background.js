@@ -18,7 +18,6 @@ ipcMain.on('load-postit-window', () => {
     minWidth: 800,
     minHeight: 600,
     parent:BrowserWindow.getFocusedWindow(),
-    modal:true,
     webPreferences: {
       enableRemoteModule: true,
       devTools: true,
@@ -48,7 +47,6 @@ ipcMain.on('load-edit-window', () => {
     minWidth: 800,
     minHeight: 600,
     parent:BrowserWindow.getFocusedWindow(),
-    modal:true,
     webPreferences: {
       enableRemoteModule: true,
       devTools: true,
@@ -79,7 +77,6 @@ ipcMain.on('load-subedit-window', (event, args) => {
     minWidth: 800,
     minHeight: 600,
     parent:BrowserWindow.getFocusedWindow(),
-    modal:true,
     webPreferences: {
       enableRemoteModule: true,
       devTools: true,
