@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain } from 'electron'
+import {app, protocol, BrowserWindow, ipcMain, Menu} from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -23,7 +23,7 @@ ipcMain.on('load-postit-window', () => {
       devTools: true,
       contextIsolation: false,
       nodeIntegration: true,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
     }
   })
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -52,7 +52,7 @@ ipcMain.on('load-edit-window', () => {
       devTools: true,
       contextIsolation: false,
       nodeIntegration: true,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
     }
   })
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -82,7 +82,7 @@ ipcMain.on('load-subedit-window', (event, args) => {
       devTools: true,
       contextIsolation: false,
       nodeIntegration: true,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
     }
   })
   ipcMain.on('subedit-accomplish',() => {
@@ -101,6 +101,7 @@ ipcMain.on('load-subedit-window', (event, args) => {
   })
 });
 async function createWindow() {
+  Menu.setApplicationMenu(null)
   // Create the browser window.
   const win = new BrowserWindow({
     width: 800,
@@ -112,7 +113,7 @@ async function createWindow() {
       devTools: true,
       contextIsolation: false,
       nodeIntegration: true,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
     }
   })
 

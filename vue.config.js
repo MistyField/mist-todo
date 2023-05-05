@@ -36,7 +36,11 @@ module.exports = defineConfig({
             "from": "src/postits/data.json",
             "to": "app/data/postits/data.json"
           }
-        ]
+        ],
+        nsis:{
+          oneClick:false,
+          allowToChangeInstallationDirectory:true,
+        }
       }
     }
   }
