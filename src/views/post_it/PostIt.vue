@@ -107,6 +107,8 @@ export default {
         data.push({'id':curId,'date':new Date().getTime(),'content':this.editor.getHtml(),'title':this.title})
         fs.writeFileSync(jsonFilePath, JSON.stringify(data));
         EventBus.$emit('toggle-success-postit', true,this.title);
+        this.title = ''
+        this.html = ''
       }
     },
     onCreated(editor) {

@@ -58,6 +58,8 @@ export default {
         data.push({id: curId, status: 'unfinished', content: this.todoContent, deadline: this.date.getTime()});
         fs.writeFileSync(jsonFilePath, JSON.stringify(data));
         EventBus.$emit('toggle-success', true,this.todoContent);
+        this.todoContent = ''
+        this.date = new Date()
       }
     },
   },
