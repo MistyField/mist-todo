@@ -37,7 +37,7 @@
                     <v-list-item-subtitle style="font-family: Quicksand;font-weight: bold;user-select: none;">{{calTimeInterval(item)}}</v-list-item-subtitle>
                   </v-card-text>
                   <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
-                    <v-btn @click="finishTodo(item)" class="align-self-end"><span style="font-weight: bold;color: #163268">I'm done</span></v-btn>
+                    <v-btn @click="finishTodo(item)" class="align-self-end" style="margin: 10px"><font-awesome-icon icon="fa-solid fa-check" style="color: #163268" /><span style="font-weight: bold;color: #163268">I'm done</span></v-btn>
                   </v-card-actions>
                 </v-card>
                 </template>
@@ -86,7 +86,10 @@
                 </v-list-item-subtitle>
               </v-card-text>
               <v-card-actions class="d-flex flex-column justify-center align-center" style="height: 100%;">
-                <v-btn class="align-self-end"><span style="font-weight: bold;color: #163268">Edit</span></v-btn>
+                <div style="display: inherit">
+                <v-btn class="align-self-end" style="margin: 10px"><font-awesome-icon icon="fa-regular fa-pen-to-square" style="color: #163268" /><span style="font-weight: bold;color: #163268">Edit</span></v-btn>
+                <v-btn class="align-self-end" style="margin: 10px"><font-awesome-icon icon="fa-solid fa-trash" style="color: #163268" /><span style="font-weight: bold;color: #163268">Delete</span></v-btn>
+                </div>
               </v-card-actions>
             </v-card>
             <v-card flat color="rgba(245, 246, 252,25%)" v-if="postits.length===0">

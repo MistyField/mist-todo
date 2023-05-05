@@ -7,11 +7,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
-import { faNoteSticky,faCalendar,faCalendarCheck } from '@fortawesome/free-regular-svg-icons'
-import { faEnvelope,faTableList } from '@fortawesome/free-solid-svg-icons'
+import { faNoteSticky,faCalendar,faCalendarCheck,faPenToSquare } from '@fortawesome/free-regular-svg-icons'
+import { faEnvelope,faTableList,faCheck,faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faGithub,faWeibo } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faEnvelope,faGithub,faWeibo,faNoteSticky,faCalendar,faTableList,faCalendarCheck)
+library.add(faEnvelope,faGithub,faWeibo,faNoteSticky,faCalendar,faTableList,faCalendarCheck,faPenToSquare,faCheck,faTrash)
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)
